@@ -1,0 +1,14 @@
+version: '2'
+services:
+  postgres:
+    image: gunnarmorling/example-postgres-ivm:1.0
+    build:
+      context: postgres
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgresuser
+     - POSTGRES_PASSWORD=postgrespw
+     - POSTGRES_DB=postgresdb
+    volumes:
+     - ./data:/var/lib/postgresql/data
