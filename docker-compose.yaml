@@ -12,3 +12,24 @@ services:
      - POSTGRES_DB=postgresdb
     volumes:
      - ./data:/var/lib/postgresql/data
+    command:
+     - "postgres"
+     - "-c"
+     - "shared_preload_libraries=pg_stat_statements"
+    networks:
+     - my-network
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+     - my-network
+networks:
+  my-network:
+    name: pg-network

@@ -1,4 +1,5 @@
 CREATE EXTENSION pg_ivm;
+CREATE EXTENSION pg_stat_statements;
 
 -- Create the schema that we'll use to populate data and watch the effect in the WAL
 CREATE SCHEMA inventory;
